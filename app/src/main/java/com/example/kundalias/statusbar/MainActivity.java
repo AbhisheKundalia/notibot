@@ -1,5 +1,6 @@
 package com.example.kundalias.statusbar;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -102,25 +103,27 @@ public class MainActivity extends AppCompatActivity {
     // Will now popup user with dialog to quit app or grant NLS access
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
-            if (!isNLServiceRunning()) {
-                new AlertDialog.Builder(this)
-                        .setMessage("You have not granted required access to application! So app will quit now")
-                        .setCancelable(false)
-                        .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                MainActivity.this.finish();
-                            }
-                        })
-                        .setNegativeButton("Give Permission", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startNLService();
-                            }
-                        })
-                        .show();
+            if (resultCode != Activity.RESULT_OK) {
+                if (!isNLServiceRunning()) {
+                    new AlertDialog.Builder(this)
+                            .setMessage("You have not granted required access to application! So app will quit now")
+                            .setCancelable(false)
+                            .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    MainActivity.this.finish();
+                                }
+                            })
+                            .setNegativeButton("Give Permission", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startNLService();
+                                }
+                            })
+                            .show();
+                }
             }
+
         }
     }
 
@@ -173,9 +176,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        unregisterReceiver(onNotice);
-        super.onDestroy();
-    }
 }

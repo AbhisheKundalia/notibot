@@ -37,7 +37,7 @@ import java.nio.charset.Charset;
 public final class Utils {
 
     /** Tag for the log messages */
-    public static final String LOG_TAG = Utils.class.getSimpleName();
+    private static final String LOG_TAG = Utils.class.getSimpleName();
 
     /**
      * Query the USGS dataset and return an {@link String} string to represent a single response.
@@ -54,11 +54,8 @@ public final class Utils {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // Extract relevant fields from the JSON response and create an String response
-        String notificationResponse = extractResponseFromJson(jsonResponse);
-
-        // Return the Response
-        return notificationResponse;
+         // Return the Response
+        return extractResponseFromJson(jsonResponse);
     }
 
     /**
@@ -150,9 +147,7 @@ public final class Utils {
             JSONObject fulfillmentObject = resultObject.getJSONObject("fulfillment");
 
             //Extract out the speech value of the fulfillment object
-            String speech = fulfillmentObject.getString("speech");
-
-            return speech;
+            return fulfillmentObject.getString("speech");
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem parsing the notificationResponse JSON results", e);
