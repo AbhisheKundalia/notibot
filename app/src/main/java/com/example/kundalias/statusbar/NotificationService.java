@@ -1,7 +1,5 @@
-package com.example.kundalias.statusbarreader;
+package com.example.kundalias.statusbar;
 
-import android.app.Notification;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +8,8 @@ import android.os.Looper;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Switch;
 import android.widget.Toast;
-
-import static com.example.kundalias.statusbarreader.R.string.fbpkg;
 
 /**
  * Created by Abhishek on 12/1/2016.
@@ -45,7 +39,6 @@ public class NotificationService extends NotificationListenerService {
             Log.i("Ticker", ticker);
             Log.i("Title", title);
             Log.i("Text", text);
-
 
 
             msgrcvd.putExtra("package", packageName);

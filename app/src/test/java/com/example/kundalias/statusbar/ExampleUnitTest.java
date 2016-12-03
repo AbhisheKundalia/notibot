@@ -1,4 +1,4 @@
-package com.example.kundalias.statusbarreader;
+package com.example.kundalias.statusbar;
 
 import org.junit.Test;
 

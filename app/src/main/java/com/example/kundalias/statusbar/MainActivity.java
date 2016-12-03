@@ -1,4 +1,4 @@
-package com.example.kundalias.statusbarreader;
+package com.example.kundalias.statusbar;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -171,5 +171,11 @@ public class MainActivity extends AppCompatActivity {
             }
             updateUi(response);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(onNotice);
+        super.onDestroy();
     }
 }

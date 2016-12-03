@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StatusbarReader</string>
+    <string name="app_name">Statusbar</string>
     <string name="fbpkg">com.facebook.katana</string>
     <string name = "autoresponse">Auto Response</string>
 </resources>
